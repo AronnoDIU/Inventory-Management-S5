@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductRepository;
+use App\Repository\PriceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * @ORM\Entity(repositoryClass=PriceRepository::class)
  */
-class Product
+class Price
 {
     /**
      * @ORM\Id
@@ -18,11 +18,6 @@ class Product
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $price;
@@ -30,18 +25,6 @@ class Product
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getPrice(): ?int
