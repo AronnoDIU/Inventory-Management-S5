@@ -16,6 +16,9 @@ class DashboardController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashboardController',
+            'user' => $this->getUser(),
+            'roles' => $this->getUser()->getRoles(),
+            'csrf_protection' => true,
         ]);
     }
 }
