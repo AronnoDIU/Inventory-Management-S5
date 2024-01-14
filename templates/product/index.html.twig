@@ -1,20 +1,36 @@
+{# templates/product/index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{% block title %}Product Index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Product Index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>
+                    <a href="{{ path('app_product_show', {'id': product.id}) }}">Show</a>
+                    <a href="{{ path('app_product_edit', {'id': product.id}) }}">Edit</a>
+                    <form method="post" action="{{ path('app_product_delete', {'id': product.id}) }}" style="display: inline-block;">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/user/PhpstormProjects/Inventory-Management-S5/src/Controller/ProductController.php'|file_link(0) }}">src/Controller/ProductController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/user/PhpstormProjects/Inventory-Management-S5/templates/product/index.html.twig'|file_link(0) }}">templates/product/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <a href="{{ path('app_product_new') }}">Create a new product</a>
 {% endblock %}

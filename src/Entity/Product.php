@@ -23,7 +23,8 @@ class Product
     private ?string $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Price::class)
+     * @ORM\JoinColumn(nullable=false)
      */
     private ?int $price;
     private \Symfony\Component\Security\Core\User\UserInterface $user;

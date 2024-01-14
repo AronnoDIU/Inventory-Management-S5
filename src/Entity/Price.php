@@ -18,7 +18,8 @@ class Price
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Price::class)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $price;
 

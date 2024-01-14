@@ -1,0 +1,18 @@
+{# templates/product/new.html.twig and templates/product/edit.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Create/Edit Product{% endblock %}
+
+{% block body %}
+    <h1>Create/Edit Product</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.price) }}
+
+    <button type="submit">Save</button>
+
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_product_index') }}">Back to list</a>
+{% endblock %}
