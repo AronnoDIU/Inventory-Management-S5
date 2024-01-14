@@ -15,7 +15,7 @@ class Product
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -23,11 +23,24 @@ class Product
     private ?string $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Price::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=Price::class, inversedBy="products")
+     * @ORM\JoinColumn(name="price_id", referencedColumnName="id", nullable=false)
      */
-    private ?int $price;
-    private \Symfony\Component\Security\Core\User\UserInterface $user;
+    private ?Price $price;
+
+    public function getPrice(): ?Price
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?Price $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    private $user;
 
     public function getId(): ?int
     {
@@ -42,18 +55,6 @@ class Product
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getPrice(): ?int
-    {
-        return $this->price;
-    }
-
-    public function setPrice(int $price): self
-    {
-        $this->price = $price;
 
         return $this;
     }
