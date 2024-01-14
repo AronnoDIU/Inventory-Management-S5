@@ -20,12 +20,13 @@ class Product
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $price;
+    private ?int $price;
+    private \Symfony\Component\Security\Core\User\UserInterface $user;
 
     public function getId(): ?int
     {
@@ -54,5 +55,10 @@ class Product
         $this->price = $price;
 
         return $this;
+    }
+
+    public function setUser(\Symfony\Component\Security\Core\User\UserInterface $user)
+    {
+        $this->user = $user;
     }
 }
